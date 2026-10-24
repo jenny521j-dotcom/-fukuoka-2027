@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>龍貓的福岡・由布院 7天散步帖</title>
+<title>福岡・由布院 7天散步帖</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&display=swap">
 <style>
 :root{--bg:#f1f6ea;--card:#fffefa;--ink:#3f4a3a;--soft:#6f7d66;--pink:#bfdcae;--pink2:#e2efd6;--mint:#cfe6d2;--sky:#d3e4ea;--line:#cfe0c2;--accent:#3f7d52;
@@ -50,6 +50,9 @@ nav button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid v
 .tips ul{margin:6px 0 0;padding-left:1.2em}
 footer{text-align:center;color:var(--soft);font-size:.8rem;margin-top:22px}
 .nav2{display:flex;justify-content:space-between;margin-top:8px}
+.sb{fill:var(--pink);stroke:var(--ink);stroke-width:2.5}
+.mascot{width:128px;height:auto;display:block;margin:0 auto 2px}
+.div{display:block;margin:0 auto 14px;width:230px}.div svg{width:100%;height:auto}
 .nav2 button{font:inherit;font-size:.9rem;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:8px 16px;cursor:pointer}
 @media (prefers-reduced-motion:no-preference){.tl{animation:in .4s ease}@keyframes in{from{opacity:0}to{opacity:1}}}
 </style>
@@ -57,7 +60,8 @@ footer{text-align:center;color:var(--soft);font-size:.8rem;margin-top:22px}
 <body>
 <div class="wrap">
 <header>
-<h1>🌳 龍貓的福岡・由布院 7天散步帖</h1>
+<svg class="mascot" viewBox="0 0 140 110" role="img" aria-label="森林小精靈"><ellipse cx="70" cy="100" rx="38" ry="6" fill="var(--line)"/><ellipse cx="70" cy="64" rx="44" ry="36" class="sb"/><ellipse cx="70" cy="76" rx="26" ry="18" fill="var(--card)"/><circle cx="56" cy="58" r="3.5" fill="var(--ink)"/><circle cx="84" cy="58" r="3.5" fill="var(--ink)"/><circle cx="46" cy="68" r="5" fill="var(--accent)" opacity=".3"/><circle cx="94" cy="68" r="5" fill="var(--accent)" opacity=".3"/><path d="M63 66q7 6 14 0" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><path d="M70 29c-14-2-18-16-8-24 12 2 18 14 8 24z" fill="var(--accent)"/><path d="M70 29c0-8 0-14-2-20" fill="none" stroke="var(--card)" stroke-width="1.8" stroke-linecap="round"/></svg>
+<h1>🌳 福岡・由布院 7天散步帖</h1>
 <p>像走進森林裡一樣，慢慢走、慢慢吃、泡泡湯 🍃</p>
 <label class="date">出發日期 <input type="date" id="d0" aria-label="出發日期"></label>
 <div class="route" aria-label="路線總覽"><span>福岡</span><i>›</i><span>太宰府</span><i>›</i><span>博多寺町</span><i>›</i><span>由布院 ♨</span><i>›</i><span>大濠・天神</span><i>›</i><span>回家</span></div>
@@ -133,14 +137,14 @@ var D=[
  ["","地下鐵空港線 → 福岡機場","國際線要再搭免費接駁巴士，記得預留時間","福岡機場 國際線","move"],
  ["","辦理登機・免稅店","","福岡機場 國際線","go"]]}
 ];
-var W=["日","一","二","三","四","五","六"],icons={go:"🍃",eat:"🍙",shop:"🧺",temple:"⛩️",move:"👣"},cur=0;
+var DIV='<div class="div" aria-hidden="true"><svg viewBox="0 0 240 32"><path d="M6 24h38M78 24h24M138 24h24M194 24h40" stroke="var(--line)" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/><path d="M52 24a9 8 0 0118 0z" fill="#e58a8a"/><rect x="58" y="24" width="6" height="6" rx="2" fill="var(--card)" stroke="var(--ink)" stroke-width="1.5"/><circle cx="57" cy="20" r="1.5" fill="#fff"/><circle cx="64" cy="19" r="1.5" fill="#fff"/><path d="M120 30V14" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/><path d="M120 18c-9 0-12-6-11-11 8 0 12 4 11 11z" fill="var(--accent)"/><path d="M120 14c8 0 11-5 10-10-8 0-11 4-10 10z" fill="var(--accent)" opacity=".7"/><ellipse cx="178" cy="24" rx="6" ry="6.5" fill="#c89b6a"/><path d="M171 21a7.5 5.5 0 0114 0z" fill="#8a6a45"/><path d="M178 15v-3" stroke="#8a6a45" stroke-width="2" stroke-linecap="round"/></svg></div>',W=["日","一","二","三","四","五","六"],icons={go:"🍃",eat:"🍙",shop:"🧺",temple:"⛩️",move:"👣"},cur=0;
 var tabs=document.getElementById("tabs"),box=document.getElementById("day"),inp=document.getElementById("d0");
 function lbl(i){if(!inp.value)return "Day "+(i+1);var p=inp.value.split("-"),d=new Date(+p[0],p[1]-1,+p[2]+i);return (d.getMonth()+1)+"/"+d.getDate()+"（"+W[d.getDay()]+"）"}
 function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function render(){
 tabs.innerHTML=D.map(function(d,i){return '<button role="tab" aria-selected="'+(i==cur)+'" data-i="'+i+'">'+d.e+" D"+(i+1)+"<small>"+lbl(i).replace(/^Day \d/,"")+"</small></button>"}).join("");
 var d=D[cur];
-var h='<section class="hero"><h2>'+d.e+" Day "+(cur+1)+"・"+esc(d.t)+"</h2><p>"+(inp.value?lbl(cur)+"　":"")+esc(d.s)+"</p></section><ul class=\"tl\">";
+var h='<section class="hero"><h2>'+d.e+" Day "+(cur+1)+"・"+esc(d.t)+"</h2><p>"+(inp.value?lbl(cur)+"　":"")+esc(d.s)+"</p></section>"+DIV+"<ul class=\"tl\">";
 d.st.forEach(function(x){
 var link=x[3]&&x[4]!="move"?'<br><a href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x[3])+'" target="_blank" rel="noopener">在地圖上看看</a>':"";
 var tm=x[0]?'<div class="time">'+x[0]+"</div>":"";
